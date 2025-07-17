@@ -1,7 +1,6 @@
 // controllers/userController.js
 
 import path from 'path';
-import User from '../models/usuarioModel.js'; // extensão .js é obrigatória em ES Modules
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -19,7 +18,7 @@ const usuarioController = {
   async criarUsuario(req, res) {
     const { nome, email, senha } = req.body;
     try {
-      await Usuario.create(nome, email, senha);
+      await Usuario.criar(nome, email, senha);
       res.send('Usuário cadastrado com sucesso!');
     } catch (error) {
       console.error(error);

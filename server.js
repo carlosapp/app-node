@@ -1,8 +1,6 @@
-// app.js (formato ES Module)
-
 import express from 'express';
 import path from 'path';
-import userRoutes from './routes/usuarioRoutes.js'; // <- .js obrigatório em ESM
+import userRoutes from './routes/usuarioRoutes.js';
 import bodyParser from 'body-parser';
 
 import { fileURLToPath } from 'url';
