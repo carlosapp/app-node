@@ -1,11 +1,12 @@
-// routes/userRoutes.js
-
+// routes/usuarioRoutes.js
 import express from 'express';
-import  usuarioController from '../app/controllers/usuarioController.js'; // precisa do `.js` no import
+import usuarioController from '../app/controllers/usuarioController.js';
 
 const router = express.Router();
 
-router.get('/', usuarioController.getForm);
-router.post('/cadastrar', usuarioController.criarUsuario);
+router.get('/cadastro', usuarioController.getForm);         // GET /usuario/cadastro
+router.get('/login', usuarioController.getLoginForm);       // GET /usuario/login
+router.post('/cadastrar', usuarioController.criarUsuario);  // POST /usuario/cadastrar
+router.post('/login', usuarioController.loginUsuario);      // ✅ POST /usuario/login
 
 export default router;

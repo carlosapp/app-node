@@ -2,7 +2,6 @@ import express from 'express';
 import path from 'path';
 import userRoutes from './routes/usuarioRoutes.js';
 import bodyParser from 'body-parser';
-
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -14,11 +13,12 @@ const app = express();
 const PORT = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rotas
-app.use('/', userRoutes);
+// ✅ Rotas com prefixo /usuario
+app.use('/usuario', userRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

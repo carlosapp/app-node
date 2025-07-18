@@ -1,0 +1,60 @@
+<!-- views/login.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="senha" placeholder="Senha" required />
+    <button onclick="fazerLogin()">Entrar</button>
+    <div id="message" class="message"></div>
+  </div>
+
+  <script>
+    async function fazerLogin() {
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('senha').value;
+      const msg = document.getElementById('message');
+
+      msg.textContent = '';
+      msg.className = 'message';
+
+      if (!email || !senha) {
+        msg.textContent = 'Preencha todos os campos.';
+        msg.classList.add('error');
+        return;
+      }
+
+      try {
+        const response = await fetch('/usuario/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, senha }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          msg.textContent = data.erro || 'Erro no login.';
+          msg.classList.add('error');
+          return;
+        }
+
+        msg.textContent = data.mensagem || 'Login efetuado com sucesso!';
+        msg.classList.add('success');
+
+        // Redirecionar para dashboard se quiser
+        // window.location.href = '/dashboard.html';
+      } catch {
+        msg.textContent = 'Erro ao conectar com o servidor.';
+        msg.classList.add('error');
+      }
+    }
+  </script>
+</body>
+</html>
